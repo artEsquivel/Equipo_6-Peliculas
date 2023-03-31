@@ -4,11 +4,55 @@ import kotlin.system.exitProcess
 val peliculas = arrayListOf<pelicula>()
 
 fun main() {
+    do{
+        println("----------------------|  BIENVENIDO |----------------------")
+    }while(!login())
+
     menuPrincipal()
+}
+
+fun login() : Boolean {
+    println("Ingrese su usuario")
+    val user = readlnOrNull()
+    println("Ingrese su contraseña")
+    val pass = readlnOrNull()
+
+    if(user == "usuario1" && pass == "P@sswd10."){
+        println("***** Inicio de sesión exitoso *****")
+        return true;
+    }else
+    {
+        println("***** Usuario y/o contraseña incorrecto *****")
+        println("***** Intenta nuevamente *****")
+        return false;
+    }
 }
 
 fun menuPrincipal() {
     println("\n\n")
+    println("----------------------|  PELÍCULAS |----------------------")
+
+    println("_________________| ¿Qué deseas hacer? |____________________________________")
+    println("""
+        "| 1 Ver todas las películas"
+        "| 2 Buscar por título
+        "| 3 Buscar por categoría
+        "| 4 Buscar por calificación
+        "| 0 Si deseas salir de la aplicación ingresa la opción
+    """)
+
+    println("Digite el número de opción deseado")
+    val opt1 = readln().toInt()
+
+    if (opt1 != 0)
+        options(opt1)
+    else {
+        println("***** Hasta luego *****")
+        exitProcess(0)
+    }
+}
+
+fun options(opt: Int){
     var pelicula1 = pelicula(1, "Jhon Wick", "Acción", 2014,
         "La ciudad de Nueva York se llena de balas cuando John Wick, un exasesino a sueldo, " +
                 "regresa de su retiro para enfrentar a los mafiosos rusos, liderados por Viggo Tarasov, " +
@@ -33,10 +77,8 @@ fun menuPrincipal() {
     println("¿Cuál película deseas ver?: ")
     var opcionPelicula = readln().toInt()
 
-    if (opcionPelicula != 0)
         verResenia(opcionPelicula)
-    else
-        exitProcess(0)
+
 }
 
 fun verResenia(idPelicula: Int) {
