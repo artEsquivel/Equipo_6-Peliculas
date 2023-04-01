@@ -53,6 +53,56 @@ fun menuPrincipal() {
 }
 
 fun options(opt: Int){
+
+    when(opt) {
+        1 -> verTodas()
+        2 -> buscarPorTitulo()
+        3 -> buscarPorCategoria()
+        4 -> buscarPorCalificacion()
+
+        else -> println("Opción inválida")
+    }
+
+}
+
+fun buscarPorCalificacion() {
+
+    println("Ingresa la calificación que deseas buscar (1-5):")
+    val calificacion = readLine() ?: ""
+    val pelicula = obtenerPelicula(calificacion, 4)
+    if (pelicula != null) {
+        println(pelicula.toString())
+    } else {
+        println("No se encontró ninguna película con la calificación ingresada.")
+    }
+}
+
+fun buscarPorCategoria() {
+    println("Ingresa la categoría de la película que deseas buscar:")
+    val categoria = readLine() ?: ""
+    val pelicula = obtenerPelicula(categoria, 3)
+    if (pelicula != null) {
+        println(pelicula.toString())
+    } else {
+        println("No se encontró ninguna película en la categoría ingresada.")
+    }
+}
+
+fun buscarPorTitulo() {
+
+    println("Ingresa el título de la película que deseas buscar:")
+    val titulo = readLine() ?: ""
+    val pelicula = obtenerPelicula(titulo, 2)
+    if (pelicula != null) {
+        println(pelicula.toString())
+    } else {
+        println("No se encontró ninguna película con el título ingresado.")
+    }
+
+}
+
+fun verTodas() {
+
     var pelicula1 = pelicula(1, "Jhon Wick", "Acción", 2014,
         "La ciudad de Nueva York se llena de balas cuando John Wick, un exasesino a sueldo, " +
                 "regresa de su retiro para enfrentar a los mafiosos rusos, liderados por Viggo Tarasov, " +
@@ -77,8 +127,17 @@ fun options(opt: Int){
     println("¿Cuál película deseas ver?: ")
     var opcionPelicula = readln().toInt()
 
-        verResenia(opcionPelicula)
+    verResenia(opcionPelicula)
+}
 
+
+fun obtenerPelicula(criterio: String, opcion: Int): pelicula? {
+    return when (opcion) {
+        2 -> peliculas.find { it.nombrePelicula == criterio }
+        3 -> peliculas.find { it.generoPelicula == criterio }
+        4 -> peliculas.find { it.calificacion == criterio }
+        else -> null
+    }
 }
 
 fun verResenia(idPelicula: Int) {
