@@ -202,7 +202,8 @@ class MenuMovie(options: Array<String>, header: String): Menu(options, header){
 
     fun menuResenia(idPelicula: Int) {
         println("1. Agregar un comentario")
-        println("2. Regresar al menú principal")
+        println("2. Eliminar un comentario")
+        println("3. Regresar al menú principal")
         print("OPCIÓN > ")
         var opcionSubmenu = readln().toInt()
 
@@ -219,7 +220,18 @@ class MenuMovie(options: Array<String>, header: String): Menu(options, header){
                 guardarResenia(idPelicula, comentario, calificacion)
                 verResenia(idPelicula)
             }
-            2 -> reload()
+            2 -> {
+                if (existeResenia(idPelicula)) {
+                    println("\nIndica el número de comentario que deseas eliminar: ")
+                    var idComentario = readln().toInt()
+                    eliminarResenia(idPelicula, idComentario)
+                    verResenia(idPelicula)
+                } else {
+                    println("\nNo existen comentarios para la película")
+                    verResenia(idPelicula)
+                }
+            }
+            3 ->reload()
         }
     }
 }
